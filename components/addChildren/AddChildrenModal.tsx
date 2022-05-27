@@ -36,7 +36,7 @@ const AddChildrenModal: React.FC<Props> = ({ setModal }) => {
           <ModalBody>
             <Alert status="info">
               <AlertIcon />
-              Scan your child's QR Code!
+              Scan your child&#39;s QR Code!
             </Alert>
             {/*@ts-ignore */}
             <QrReader
