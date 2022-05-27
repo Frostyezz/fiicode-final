@@ -1,6 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
 
+import { useChannel } from "../../hooks/useChannel";
+
+import { UserContext } from "../../contexts/userContext";
+
 import {
   Modal,
   ModalOverlay,
@@ -25,7 +29,28 @@ interface Props {
 }
 
 const JoinFamilyModal: React.FC<Props> = ({ setModal }) => {
+  const { addUser } = React.useContext(UserContext);
   const token = uuidv4();
+  const toast = useToast();
+  const [channel, ably] = useChannel(token, async (data: any) => {
+    try {
+      await axios.post("/api/family/children/activate", data.data);
+      addUser(data.data);
+      toast({
+        title: "You joined the family successfully!",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "An error occured!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  });
   return (
     <>
       <Modal isOpen={true} isCentered onClose={() => setModal("NONE")}>

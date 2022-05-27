@@ -125,11 +125,11 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
               {avatar ? (
                 <Alert status="success">
                   <AlertIcon className="rounded animate__animated animate__fadeInDown animate__faster" />
-                  Imaginea a fost încărcată cu succes!
+                  Image successfully uploaded!
                 </Alert>
               ) : (
                 <Upload
-                  text="Drag and drop or click to upload a profile picture"
+                  text="Drag and drop or click to upload a profile picture (optional)"
                   onFileAccepted={sendProfileImg}
                 />
               )}
