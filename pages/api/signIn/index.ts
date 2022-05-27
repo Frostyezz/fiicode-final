@@ -43,7 +43,7 @@ export default async function handler(
           .setIssuedAt()
           .setExpirationTime("30d")
           .sign(new TextEncoder().encode(secret));
-        const serialised = serialize("JWT", token, {
+        const serialised = serialize("GuardianJWT", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV !== "development",
           sameSite: "strict",

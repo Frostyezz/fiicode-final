@@ -2,8 +2,10 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Center, useColorModeValue } from "@chakra-ui/react";
 
+//@ts-ignore
 export default function Upload({ onFileAccepted, text }) {
   const onDrop = useCallback(
+    //@ts-ignore
     (acceptedFiles) => {
       onFileAccepted(acceptedFiles[0]);
     },
@@ -12,6 +14,7 @@ export default function Upload({ onFileAccepted, text }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    //@ts-ignore
     accept: "image/*",
     maxFiles: 1,
     multiple: false,

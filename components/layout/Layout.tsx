@@ -8,7 +8,7 @@ import NavDrawer from "./NavDrawer";
 
 // @ts-ignore
 const Layout = ({ children }) => {
-  const { user, removeUser } = React.useContext(UserContext);
+  const { user } = React.useContext(UserContext);
   return (
     <>
       <Head>

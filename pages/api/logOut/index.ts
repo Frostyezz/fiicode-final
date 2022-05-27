@@ -8,7 +8,7 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
-        const serialised = serialize("JWT", "", {
+        const serialised = serialize("GuardianJWT", "", {
           httpOnly: true,
           secure: process.env.NODE_ENV !== "development",
           sameSite: "strict",
