@@ -2,8 +2,6 @@ import React, { SyntheticEvent } from "react";
 
 import { UserContext } from "../../contexts/userContext";
 
-import Upload from "../upload/Upload";
-
 import { useRouter } from "next/router";
 
 import {
@@ -15,8 +13,6 @@ import {
   ModalCloseButton,
   Button,
   Input,
-  AlertIcon,
-  Alert,
   useToast,
 } from "@chakra-ui/react";
 
@@ -71,7 +67,7 @@ const SignInModal: React.FC<Props> = ({ setModal }) => {
       <Modal isOpen={true} isCentered onClose={() => setModal("NONE")}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Log into your account</ModalHeader>
+          <ModalHeader className="border-b">Log into your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <form onSubmit={signin}>

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const AccountSchema = new mongoose.Schema({
+  family: String,
   email: String,
   password: String,
   name: String,

@@ -88,7 +88,7 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
       <Modal isOpen={true} isCentered onClose={() => setModal("NONE")}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create an account</ModalHeader>
+          <ModalHeader className="border-b">Create an account</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <form onSubmit={signup}>

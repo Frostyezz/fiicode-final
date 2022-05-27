@@ -74,18 +74,27 @@ const NavDrawer = () => {
           </DrawerHeader>
 
           <DrawerBody className="flex flex-col text-xl font-bold max-h-72 justify-evenly">
-            <Link href="/">Location feed</Link>
-            <Link href="/signUp">Children</Link>
-            <Link href="/signIn">My family</Link>
-            <Link href="/join">Scan a QR code</Link>
+            <Link href="/">
+              <a onClick={onClose}>Location feed</a>
+            </Link>
+            <Link href="/children">
+              <a onClick={onClose}>Children</a>
+            </Link>
+            <Link href="/signIn">
+              <a onClick={onClose}>My family </a>
+            </Link>
+            <Link href="/children">
+              <a onClick={onClose}>Scan a QR code</a>
+            </Link>
           </DrawerBody>
 
           <DrawerFooter className="bg-green flex flex-row mt-auto justify-between px-3 shadow-shaodow_nav">
             <Avatar
+              className="mr-2"
               name={user.name + " " + user.last}
-              src="https://bit.ly/dan-abramov"
+              src={user.avatar}
             />
-            <h1 className="text-lg font-bold">{user.name}</h1>
+            <h1 className="text-lg font-bold mr-auto">{user.name}</h1>
             <Button colorScheme="gray" onClick={logout}>
               Log Out
             </Button>

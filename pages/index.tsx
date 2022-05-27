@@ -5,6 +5,7 @@ import { Button } from "@chakra-ui/react";
 import Slideshow from "../components/swiper/Slideshow";
 import SignUpModal from "../components/signup/SignUpModal";
 import SignInModal from "../components/signin/SignInModal";
+import JoinFamilyModal from "../components/joinFamily/JoinFamilyModal";
 
 import { useMobile } from "../hooks/mediaQueries";
 
@@ -45,6 +46,7 @@ const Home: NextPage = () => {
           <Button onClick={() => setModal("JOIN")}>Join my family</Button>
           {modal === "REGISTER" && <SignUpModal setModal={setModal} />}
           {modal === "LOGIN" && <SignInModal setModal={setModal} />}
+          {modal === "JOIN" && <JoinFamilyModal setModal={setModal} />}
         </div>
       </div>
     </div>

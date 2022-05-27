@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../utils/dbConnect";
 // @ts-ignore
 import Account from "../../../models/Account";
+// @ts-ignore
+import Family from "../../../models/Family";
 import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
 import { serialize } from "cookie";
@@ -38,6 +40,12 @@ export default async function handler(
           avatar,
           password: hash,
         });
+
+        const family = new Family({
+          members: [account._id],
+        });
+
+        await family.save();
         const user = await account.save();
 
         const token = await new SignJWT({ id: account._id })

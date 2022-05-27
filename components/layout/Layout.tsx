@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Logo</title>
+        <title>Guardian</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"
