@@ -16,7 +16,7 @@ export default async function handler(
       try {
         const { name, id, family } = req.body;
 
-        const token = await new SignJWT({ id, family, name })
+        const token = await new SignJWT({ id, family, name, role: "CHILD" })
           .setProtectedHeader({
             alg: "HS256",
           })

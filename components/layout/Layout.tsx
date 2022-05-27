@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
           href="/favicon-16x16.png"
         />
       </Head>
-      {user && <NavDrawer />}
+      {user?.role === "USER" && <NavDrawer />}
       {children}
     </>
   );

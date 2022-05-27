@@ -35,7 +35,7 @@ const JoinFamilyModal: React.FC<Props> = ({ setModal }) => {
   const [channel, ably] = useChannel(token, async (data: any) => {
     try {
       await axios.post("/api/family/children/activate", data.data);
-      addUser(data.data);
+      addUser({...data.data, role:"CHILD"});
       toast({
         title: "You joined the family successfully!",
         status: "success",

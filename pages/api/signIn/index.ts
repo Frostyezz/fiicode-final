@@ -34,7 +34,7 @@ export default async function handler(
           throw new Error("Invalid password or email!");
         }
 
-        const token = await new SignJWT({ id: account._id })
+        const token = await new SignJWT({ id: account._id, role: "USER" })
           .setProtectedHeader({
             alg: "HS256",
           })

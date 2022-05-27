@@ -48,7 +48,7 @@ export default async function handler(
         await family.save();
         const user = await account.save();
 
-        const token = await new SignJWT({ id: account._id })
+        const token = await new SignJWT({ id: account._id, role:"USER" })
           .setProtectedHeader({
             alg: "HS256",
           })

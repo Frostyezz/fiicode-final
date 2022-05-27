@@ -57,7 +57,7 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
         isClosable: true,
       });
 
-      addUser(data.user);
+      addUser({ ...data.user, role: "USER" });
       setLoading(false);
       router.push("/activity");
     } catch (error: any) {
