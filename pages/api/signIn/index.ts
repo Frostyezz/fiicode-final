@@ -26,13 +26,13 @@ export default async function handler(
 
         const account = await Account.findOne({ email });
         if (!account) {
-          throw new Error("Account not found!");
+          throw new Error("Invalid password or email!");
         }
 
         const valid = await bcrypt.compare(password, account.password);
 
         if (!valid) {
-          throw new Error("Invalid password!");
+          throw new Error("Invalid password or email!");
         }
 
         const token = await new SignJWT({ id: account._id })

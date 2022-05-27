@@ -26,8 +26,7 @@ interface Props {
   setModal: (item: string) => void;
 }
 
-const SignUpModal: React.FC<Props> = ({ setModal }) => {
-  const [avatar, setAvatar] = React.useState("");
+const SignInModal: React.FC<Props> = ({ setModal }) => {
   const [loading, setLoading] = React.useState(false);
 
   const router = useRouter();
@@ -36,22 +35,17 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
 
   const toast = useToast();
 
-  const signup = async (e: SyntheticEvent) => {
+  const signin = async (e: SyntheticEvent) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target as HTMLFormElement;
     try {
-      const { data } = await axios.post("/api/signUp", {
+      const { data } = await axios.post("/api/signIn", {
         email: form.email.value,
         password: form.password.value,
-        //@ts-ignore
-        name: form.name.value,
-        last: form.last.value,
-        avatar: avatar ? avatar : null,
       });
       toast({
-        title: "Account created successfully!",
-        description: "You are logged into your new account.",
+        title: "You succesfully logged into your account!",
         status: "success",
         duration: 9000,
         isClosable: true,
@@ -72,26 +66,15 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
     }
   };
 
-  const sendProfileImg = async (file: any) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "fiicode");
-    const { data } = await axios.post(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/auto/upload`,
-      formData
-    );
-    setAvatar(data.url);
-  };
-
   return (
     <>
       <Modal isOpen={true} isCentered onClose={() => setModal("NONE")}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create an account</ModalHeader>
+          <ModalHeader>Log into your account</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form onSubmit={signup}>
+            <form onSubmit={signin}>
               <Input
                 className="my-2"
                 isRequired
@@ -106,40 +89,13 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
                 name="password"
                 type="password"
               />
-              <div className="flex flex-row">
-                <Input
-                  className="my-2 mr-1"
-                  isRequired
-                  placeholder="First Name"
-                  name="name"
-                  type="text"
-                />
-                <Input
-                  className="my-2 ml-1"
-                  isRequired
-                  placeholder="Last Name"
-                  name="last"
-                  type="text"
-                />
-              </div>
-              {avatar ? (
-                <Alert status="success">
-                  <AlertIcon className="rounded animate__animated animate__fadeInDown animate__faster" />
-                  Imaginea a fost încărcată cu succes!
-                </Alert>
-              ) : (
-                <Upload
-                  text="Drag and drop or click to upload a profile picture"
-                  onFileAccepted={sendProfileImg}
-                />
-              )}
               <Button
                 isLoading={loading}
                 type="submit"
                 colorScheme="blue"
                 className="my-5 w-full"
               >
-                Sign Up
+                Log in
               </Button>
             </form>
           </ModalBody>
@@ -149,4 +105,4 @@ const SignUpModal: React.FC<Props> = ({ setModal }) => {
   );
 };
 
-export default SignUpModal;
+export default SignInModal;

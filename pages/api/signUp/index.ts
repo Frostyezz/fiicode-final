@@ -22,16 +22,40 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
-        const { email, password, username } = req.body;
+        const { email, password, name, last, avatar } = req.body;
+
+        const exists = await Account.findOne({ email });
+        if (exists) {
+          throw new Error("Email address already used!");
+        }
 
         const hash = await bcrypt.hash(password, 10);
 
         const account = new Account({
           email,
-          username,
+          name,
+          last,
+          avatar,
           password: hash,
         });
         const user = await account.save();
+
+        const token = await new SignJWT({ id: account._id })
+          .setProtectedHeader({
+            alg: "HS256",
+          })
+          .setJti(nanoid())
+          .setIssuedAt()
+          .setExpirationTime("30d")
+          .sign(new TextEncoder().encode(secret));
+        const serialised = serialize("GuardianJWT", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== "development",
+          sameSite: "strict",
+          maxAge: 60 * 60 * 24 * 30,
+          path: "/",
+        });
+        res.setHeader("Set-Cookie", serialised);
 
         res.status(200).json({ user });
       } catch (error: any) {

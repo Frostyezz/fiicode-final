@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 const AccountSchema = new mongoose.Schema({
   email: String,
   password: String,
-  username: String,
+  name: String,
+  last: String,
+  avatar: String,
   joined: { type: Date, default: Date.now },
 });
 
