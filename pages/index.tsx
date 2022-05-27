@@ -1,68 +1,45 @@
 import type { NextPage } from "next";
-import { SyntheticEvent, useState } from "react";
-import { Button, Input } from "@chakra-ui/react";
-import axios from "axios";
+import React from "react";
+import Image from "next/image";
+import { Button } from "@chakra-ui/react";
+import Slideshow from "../components/swiper/Slideshow";
+import SignUpModal from "../components/signup/SignUpModal";
+
+import { useMobile } from "../hooks/mediaQueries";
 
 const Home: NextPage = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const isMobile = useMobile();
 
-  const signup = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-
-    try {
-      const { data } = await axios.post("/api/signUp", {
-        email: form.email.value,
-        password: form.password.value,
-        username: form.username.value,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const signin = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    try {
-      const { data } = await axios.post("/api/signIn", {
-        email: form.email.value,
-        password: form.password.value,
-      });
-      setLoggedIn(true);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const logOut = async () => {
-    try {
-      await axios.post("/api/logOut");
-      setLoggedIn(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  if (loggedIn) {
-    return <Button onClick={logOut}>Log Out</Button>;
-  }
+  const [modal, setModal] = React.useState("NONE");
 
   return (
-    <div className="flex flex-row w-100 justify-between">
-      <form onSubmit={signin}>
-        <Input placeholder="email" name="email" type="email" />
-        <Input placeholder="password" name="password" type="password" />
-        <Button type="submit">Sign in</Button>
-      </form>
-      <form onSubmit={signup}>
-        <Input placeholder="email" name="email" type="email" />
-        <Input placeholder="username" name="username" type="text" />
-        <Input placeholder="password" name="password" type="password" />
-        <Button type="submit">Sign up</Button>
-      </form>
+    <div className="flex flex-col w-screen h-screen text-center overflow-hidden">
+      <div className="w-full h-full mx-auto flex flex-col-reverse md:flex-row-reverse">
+        <Slideshow />
+        <div className="w-1/3 h-full flex flex-col mx-auto justify-center items-center">
+          {isMobile ? (
+            <Image
+              src="/logo-bg.png"
+              width={210}
+              height={70}
+              layout="fixed"
+              priority={true}
+            />
+          ) : (
+            <Image
+              src="/logo-bg.png"
+              width={410}
+              height={140}
+              priority={true}
+            />
+          )}
+          <Button onClick={() => setModal("REGISTER")} className="mb-5 mt-10">
+            Get Started
+          </Button>
+          <Button onClick={() => setModal("JOIN")}>Join my family</Button>
+          {modal === "REGISTER" && <SignUpModal setModal={setModal} />}
+        </div>
+      </div>
     </div>
   );
 };
