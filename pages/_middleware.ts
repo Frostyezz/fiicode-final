@@ -28,6 +28,7 @@ export default async function middleware(req: NextApiRequest) {
         return NextResponse.rewrite(url);
       } else return NextResponse.next();
     } else {
+      if (url.pathname === "/child-panel-dev") return NextResponse.next();
       url.pathname = "/child-panel";
       return NextResponse.rewrite(url);
     }

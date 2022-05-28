@@ -57,7 +57,6 @@ const Markers = () => {
 
   React.useEffect(() => {
     if (map) {
-      Pusher.logToConsole = true;
       //@ts-ignore
       const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_API_KEY, {
         cluster: "eu",

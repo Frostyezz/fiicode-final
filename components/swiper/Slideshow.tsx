@@ -27,7 +27,7 @@ const Slideshow = () => {
               layout="fill"
             />
           </SwiperSlide>
-          <SwiperSlide className="mt-5" key={i + 10}>
+          <SwiperSlide className="mt-5" key={i + 4}>
             <Image
               priority={true}
               src={"/Girl_" + i.toString() + ".svg"}

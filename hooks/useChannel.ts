@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const authUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/api/createTokenRequest"
-    : `https://fiicode-final-robertmoraru2012-yahoocom.vercel.app/api/createTokenRequest`;
+    : `https://guardian-app.vercel.app/api/createTokenRequest`;
 
 const ably = new Ably.Realtime.Promise({
   authUrl,
