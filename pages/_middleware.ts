@@ -18,12 +18,12 @@ export default async function middleware(req: NextApiRequest) {
     return NextResponse.rewrite(url);
   }
 
-  const homepage = url.pathname === "/";
+  const invalid = url.pathname === "/" || url.pathname === "/child-panel";
 
   try {
     const verified = await jwtVerify(jwt, new TextEncoder().encode(secret));
     if (verified.payload.role === "USER") {
-      if (homepage) {
+      if (invalid) {
         url.pathname = "/activity";
         return NextResponse.rewrite(url);
       } else return NextResponse.next();

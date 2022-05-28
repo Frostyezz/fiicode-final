@@ -4,6 +4,8 @@ import dbConnect from "../../../utils/dbConnect";
 import Account from "../../../models/Account";
 // @ts-ignore
 import Family from "../../../models/Family";
+// @ts-ignore
+import Map from "../../../models/Map";
 import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
 import { serialize } from "cookie";
@@ -45,10 +47,16 @@ export default async function handler(
           members: [account._id],
         });
 
-        await family.save();
+        const saved = await family.save();
         const user = await account.save();
 
-        const token = await new SignJWT({ id: account._id, role:"USER" })
+        const map = new Map({
+          family: saved._id,
+        });
+
+        await map.save();
+
+        const token = await new SignJWT({ id: account._id, role: "USER" })
           .setProtectedHeader({
             alg: "HS256",
           })

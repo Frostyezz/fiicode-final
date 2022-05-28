@@ -41,6 +41,7 @@ const ChildInfo: React.FC<Props> = ({ token, setModal }) => {
         id: user._id,
         //@ts-ignore
         name: form.name.value,
+        avatar: avatar ? avatar : null,
       });
       //@ts-ignore
       channel?.publish({ name: "qr-scanned", data });

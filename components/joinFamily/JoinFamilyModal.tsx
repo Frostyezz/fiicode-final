@@ -32,16 +32,18 @@ const JoinFamilyModal: React.FC<Props> = ({ setModal }) => {
   const { addUser } = React.useContext(UserContext);
   const token = uuidv4();
   const toast = useToast();
+  const router = useRouter();
   const [channel, ably] = useChannel(token, async (data: any) => {
     try {
       await axios.post("/api/family/children/activate", data.data);
-      addUser({...data.data, role:"CHILD"});
+      addUser({ ...data.data, role: "CHILD" });
       toast({
         title: "You joined the family successfully!",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
+      router.push("/child-panel");
     } catch (error) {
       toast({
         title: "An error occured!",

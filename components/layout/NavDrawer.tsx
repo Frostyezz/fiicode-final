@@ -57,7 +57,7 @@ const NavDrawer = () => {
       <nav
         ref={btnRef.current}
         onClick={onOpen}
-        className={`fixed top inset-y-5 text-5xl bg-white z-50 w-max h-max rounded-r-xl shadow-shadow_nav cursor-pointer`}
+        className={`z fixed top inset-y-20 text-5xl bg-white w-max h-max rounded-r-xl shadow-shadow_nav cursor-pointer`}
       >
         <JustifyLeft />
       </nav>
@@ -74,7 +74,7 @@ const NavDrawer = () => {
           </DrawerHeader>
 
           <DrawerBody className="flex flex-col text-xl font-bold max-h-72 justify-evenly">
-            <Link href="/">
+            <Link href="/activity">
               <a onClick={onClose}>Location feed</a>
             </Link>
             <Link href="/children">
