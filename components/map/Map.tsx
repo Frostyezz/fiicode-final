@@ -3,11 +3,6 @@ import React from "react";
 import {
   MapContainer,
   TileLayer,
-  Marker,
-  Popup,
-  GeoJSON,
-  Circle,
-  useMapEvents,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";

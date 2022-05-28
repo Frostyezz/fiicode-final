@@ -32,14 +32,12 @@ export default async function handler(
           { $push: { children: { name: saved.name, id: saved._id, avatar } } },
           { new: true },
           (err: any, doc: any) => {
-            res
-              .status(200)
-              .json({
-                family: doc._id,
-                name: saved.name,
-                id: saved._id,
-                avatar,
-              });
+            res.status(200).json({
+              family: doc._id,
+              name: saved.name,
+              id: saved._id,
+              avatar,
+            });
           }
         );
       } catch (error: any) {

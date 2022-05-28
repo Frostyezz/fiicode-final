@@ -50,7 +50,6 @@ const Markers = () => {
   const { map } = React.useContext(MapContext);
 
   const [children, setChildren] = React.useState<any[]>([]);
-  console.log(children);
 
   const safe = { fillColor: "blue", color: "blue" };
   const dangerous = { fillColor: "red", color: "red" };
